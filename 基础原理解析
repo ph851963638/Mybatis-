@@ -1,0 +1,35 @@
+Mapper  
+
+List<User>  // 返回值    getAll();   方法名
+
+
+xml
+<select id="getAll"  resultType="User">
+select * from user
+</select>
+
+
+测试类
+先调用方法；
+List<User> users=um.getAll()
+for(User u :user){
+    "  user";
+}
+
+接口中的方法返回 类型是集合，关联的sql语句中的resultType为范性
+
+
+Mapper
+List<User> getUserLikeUname(@Param("name")String uname); 返回类型
+
+xml
+<Select id="getUserLikeUname" resultType="User">
+select * from users where uname like #{uname}
+</select>
+
+List<User> users=um.getUserLikeUname("%东%")；
+sysout(user);
+
+
+
+
