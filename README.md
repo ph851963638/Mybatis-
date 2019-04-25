@@ -82,6 +82,69 @@ List<User> getUserBywhere(@Param("u") User user) //接口中的方法
     }
     
     
+    一、导入jar包 mybatis-3.x.x.jar    mysql-connector.jar
+    二、mybatis配置文件，默认在类路径下，mybatis-config
+    <configuration>
+    <配置数据库文件>
+    <properties resource="db.properties"></properties>
+    <!-- 别名 -->
+  <typeAliases>
+  <typeAlias alias="User"  type="com.mybatis1.domain.User"/>
+  </typeAliases>
+  <!-- 配置数据源：mysql连接的参数 -->
+    <environments>
+    <environment>
+    <事务管理器>
+    <数据源>
+    <property name=driver/url/username/password
+    </environment>    
+    </environments>
+<!-- 映射：xml文件，包括声明sql语句 ，包名.xml文件名   xxMapper.xml   JavaBean  User  UserMapper.xml>
+
+  <mappers>
+    <mapper resource="UserMapper.xml"/>
+  </mappers>
+  
+  
+ 映射文件：UserMapper 
+ 1、声明sql语句
+ <!-- 声明sql语句 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- namespace：对应的是一个接口UserMapper，关联xml文件 -->
+<mapper namespace="com.mybatis1.dao.UserMapper">
+  方法声明
+  <update id="update">
+  update users set uname=#{uname}  where uid=#{uid}
+  </update>
+  
+ 接口定义方法
+ int update(User user);  //int为返回类型   update方法名称  user为参数
+ 
+ 测试类：
+ 使用um调用update   
+ 
+ String res="mybatis.xml";
+		try {
+		  InputStream is=Resources.getResourceAsStream(res);  
+      SqlSessionFactory factory=new SqlSessionFactoryBuilder().build(is);
+      SqlSession ss=factory.openSession()
+      UserMapper um=ss.getMapper(UserMapper.class);
+      User  user =new User(2,"tim");
+      int u=um.update(user);
+     
+     
+ 
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
