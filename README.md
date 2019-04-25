@@ -74,7 +74,12 @@ List<User> getUserBywhere(@Param("u") User user) //接口中的方法
   </choose>
 </select>
     
-    
+    User u=new User();
+    Map<Integer,user> users=um.getUsersByKey(u);
+    Set<Integer> keys =users.keySet();
+    for(Integer k:keys){
+    system.out.println(k+"="+users.get(k));
+    }
     
     
     
