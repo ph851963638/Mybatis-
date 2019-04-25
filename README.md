@@ -126,10 +126,11 @@ List<User> getUserBywhere(@Param("u") User user) //接口中的方法
  使用um调用update   
  
  String res="mybatis.xml";
-		try {
-		  InputStream is=Resources.getResourceAsStream(res);  
+ try {
+      InputStream is=Resources.getResourceAsStream(res);  
       SqlSessionFactory factory=new SqlSessionFactoryBuilder().build(is);
       SqlSession ss=factory.openSession()
+      3-执行接口中的方法,Sqlsession 获取接口对象
       UserMapper um=ss.getMapper(UserMapper.class);
       User  user =new User(2,"tim");
       int u=um.update(user);
