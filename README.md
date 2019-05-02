@@ -141,6 +141,8 @@ List<User> getUserBywhere(@Param("u") User user) //接口中的方法
     
     
     
+    01  属性名与字段名一致；
+    02
     
     
     
