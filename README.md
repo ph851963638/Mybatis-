@@ -134,15 +134,43 @@ List<User> getUserBywhere(@Param("u") User user) //接口中的方法
       UserMapper um=ss.getMapper(UserMapper.class);
       User  user =new User(2,"tim");
       int u=um.update(user);
-     
-     
+ }
+ 
+ 
+ 
+ 
+ 
+ 
+ 1:n  多表关联
+ 
+1. <select id="getUserById" resultType="ListUsers">
+ select *from users where uid=#{uid}
+ </select>
+1-3-2   流程步骤  查询用户表的cid 通过查询地址表的uid查询到相关的数据  然后通过resultmap返回相关的数据
+
+
+2.<!--select 对应相关的查询方法，与select标签的id一致 -->
+<resultMap type="User" id="ListUsers">
+<id column="uid" property="uid"/>  
+<result column="uname" property="uname"/>
+<collection property="ads"  //ads为用户类创建的属性
+   select="_getAddress"     //运用获取地址表的相关信息将地址表中的内容查询出来
+   column="uid"  //  uid同关键字   通过关键字查询
+ >
+</collection>  
+</resultMap>
+
+3. <select id="_getAddress"  type="Address">
+select  *from  address where uid=#{uid}  
+ </select>
+  
+   
  
     
     
     
     
-    01  属性名与字段名一致；
-    02
+   
     
     
     
