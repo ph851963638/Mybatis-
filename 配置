@@ -1,0 +1,88 @@
+1、配置数据库文件，连接数据库
+2、类型别名
+3、配置数据源  设置环境变量参数
+环境默认值 参数和id相同
+事务管理器的设置
+连接池的设置
+4、设置映射文件路径
+
+My-config配置文件流程
+<configuration>
+<1.配置数据库文件，连接数据库>
+<property resource="db.properties"  />
+<类型别名>
+<typeAliases>
+<typeAliases alias="****"   type="路径名称">
+</typeAliases>
+<配置数据源，mysql连接参数>
+环境配置（environments）
+MyBatis 可以配置成适应多种环境，这种机制有助于将 SQL 映射应用于多种数据库之中， 现实情况下有多种理由需要这么做。例如，开发、测试和生产环境需要有不同的配置；或者想在具有相同 Schema 的多个生产数据库中 使用相同的 SQL 映射。有许多类似的使用场景。
+
+不过要记住：尽管可以配置多个环境，但每个 SqlSessionFactory 实例只能选择一种环境。
+
+所以，如果你想连接两个数据库，就需要创建两个 SqlSessionFactory 实例，每个数据库对应一个。而如果是三个数据库，就需要三个实例，依此类推，记起来很简单：
+
+每个数据库对应一个 SqlSessionFactory 实例
+为了指定创建哪种环境，只要将它作为可选的参数传递给 SqlSessionFactoryBuilder 即可。可以接受环境配置的两个方法签名是：
+<environments default="development">
+  <environment id="development">
+    <transactionManager type="JDBC">
+      <property name="..." value="..."/>
+    </transactionManager>
+    <dataSource type="POOLED">
+      <property name="driver" value="${driver}"/>
+      <property name="url" value="${url}"/>
+      <property name="username" value="${username}"/>
+      <property name="password" value="${password}"/>
+    </dataSource>
+  </environment>
+</environments>
+1.默认使用的环境ID   default="development"
+每个environment元素定义的环境的ID（id="development"）
+事务管理器的配置：type=jdbc
+数据源的配置 type="pooled"
+ <!-- 映射：xml文件，包括声明sql语句 ，包名.xml文件名   xxMapper.xml   JavaBean   User  UserMapper.xml
+ 	Product    ProductMapper.xml -->
+  <mappers>
+    <mapper resource="com/mybatis1/dao/UserMapper2.xml"/>
+  </mappers>
+  
+  简单的数据库配置文件就到这里了  完整代码如下：
+  <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!-- 配置数据库文件 -->
+<properties resource="db.properties"></properties>
+<!-- 别名 -->
+<typeAliases>
+<typeAlias alias="User"  type="com.mybatis1.domain.User"/>
+<typeAlias alias="Country"  type="com.mybatis1.domain.Country"/>
+<typeAlias alias="Address"  type="com.mybatis1.domain.Address"/>
+<typeAlias alias="Cart"  type="com.mybatis1.domain.Cart"/>
+<typeAlias alias="Product"  type="com.mybatis1.domain.Product"/>
+
+</typeAliases>
+<!-- 配置数据源：mysql连接的参数 -->
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="${mysql.driver}"/>
+        <property name="url" value="${mysql.url}"/>
+        <property name="username" value="${mysql.username}"/>
+        <property name="password" value="${mysql.password}"/>
+      </dataSource>
+    </environment>
+  </environments>
+ <!-- 映射：xml文件，包括声明sql语句 ，包名.xml文件名   xxMapper.xml   JavaBean   User  UserMapper.xml
+ 	Product    ProductMapper.xml -->
+  <mappers>
+    <mapper resource="com/mybatis1/dao/UserMapper2.xml"/>
+        <mapper resource="com/mybatis1/dao/ProductMapper3.xml"/>
+  </mappers>
+</configuration>
+
+  
+  
