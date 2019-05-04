@@ -164,8 +164,22 @@ List<User> getUserBywhere(@Param("u") User user) //接口中的方法
 select  *from  address where uid=#{uid}  
  </select>
   
-   
+  
+  
+  
+  if(trim)
  
+ <select id=""  resultType="">
+ select *from users 
+ <trim prefix="where" suffixoverrides="and">
+  <if test="***">
+    uid=#{user.uid} and
+    </if>
+  <if test="***">
+    uname likeconcat ('%',#{user.uname},'%')
+  </trim>
+   
+ </select>
     
     
     
