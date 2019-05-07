@@ -178,8 +178,50 @@ select  *from  address where uid=#{uid}
   <if test="***">
     uname likeconcat ('%',#{user.uname},'%')
   </trim>
-   
  </select>
+  
+  
+  MyBatis逆向工程- 关联数据库，表映射
+1.导包  generator -core 
+2.添加自动生成内容的配置---   conf/xxx.xml
+3.生成配置文件中指定的内容
+4.生成默认的内容和文件
+5.生成配置文件 mbg.xml
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
     
     
     
